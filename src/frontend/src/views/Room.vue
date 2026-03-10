@@ -172,6 +172,11 @@ function copyInviteLink() {
   alert('邀请链接已复制！')
 }
 
+function copyRoomId() {
+  navigator.clipboard.writeText(roomId.value)
+  alert('邀请码已复制！')
+}
+
 function startGame() {
   if (!canStart.value) return
   // 保存房间数据到 localStorage，供游戏页面使用
@@ -343,10 +348,10 @@ onUnmounted(() => {
               
               <!-- 武将头像 -->
               <div class="w-24 h-24 mx-auto mb-3 rounded-lg bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center text-5xl border-4 shadow-lg"
-                :class="hero.faction === 'wei' ? 'border-blue-500 shadow-blue-500/20' : hero.faction === 'shu' ? 'border-green-500 shadow-green-500/20' : 'border-red-500 shadow-red-500/20'"
+                :class="hero.faction === '魏' ? 'border-blue-500 shadow-blue-500/20' : hero.faction === '蜀' ? 'border-green-500 shadow-green-500/20' : 'border-red-500 shadow-red-500/20'"
               >
                 <span class="font-bold" 
-                  :class="hero.faction === 'wei' ? 'text-blue-400' : hero.faction === 'shu' ? 'text-green-400' : 'text-red-400'"
+                  :class="hero.faction === '魏' ? 'text-blue-400' : hero.faction === '蜀' ? 'text-green-400' : 'text-red-400'"
                 >{{ hero.name[0] }}</span>
               </div>
               
@@ -354,7 +359,7 @@ onUnmounted(() => {
               <div class="text-center mb-2">
                 <span :class="[
                   'text-2xl font-chinese',
-                  hero.faction === 'wei' ? 'text-blue-400' : hero.faction === 'shu' ? 'text-green-400' : 'text-red-400'
+                  hero.faction === '魏' ? 'text-blue-400' : hero.faction === '蜀' ? 'text-green-400' : 'text-red-400'
                 ]">
                   {{ hero.name }}
                 </span>
@@ -402,7 +407,7 @@ onUnmounted(() => {
           <div class="flex items-center justify-between p-3 bg-slate-900/50 rounded-lg">
             <span class="text-white font-mono text-lg">{{ roomId }}</span>
             <button
-              @click="() => { navigator.clipboard.writeText(roomId); alert('邀请码已复制！') }"
+              @click="copyRoomId"
               class="text-gold hover:text-yellow-400"
             >
               复制
