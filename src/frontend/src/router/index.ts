@@ -23,7 +23,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/game/:roomId',
     name: 'Game',
-    component: () => import('@/views/Game.vue'),
+    component: () => import('@/views/GameView.vue'),
     meta: { title: '游戏中' }
   }
 ]

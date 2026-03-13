@@ -144,6 +144,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import GameMap from '../components/GameMap.vue'
 import { useGameStore } from '../stores/game'
 import { storeToRefs } from 'pinia'
