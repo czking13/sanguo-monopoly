@@ -2,6 +2,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import type { Hero } from '@/types'
+import { heroes } from '@/data/heroes'
 
 const route = useRoute()
 const router = useRouter()
@@ -9,15 +10,7 @@ const router = useRouter()
 const playerName = ref(localStorage.getItem('playerName') || '玩家')
 const playerId = ref(localStorage.getItem('playerId') || `player_${Date.now()}`)
 
-// 武将列表
-const heroes = ref<Hero[]>([
-  { id: 'caocao', name: '曹操', faction: 'wei', rarity: 'legendary', skill: { name: '挟天子', description: '经过起点额外获得15%资金', type: 'passive' }, unlocked: true },
-  { id: 'liubei', name: '刘备', faction: 'shu', rarity: 'legendary', skill: { name: '仁德', description: '经过敌方城池过路费减半', type: 'passive' }, unlocked: true },
-  { id: 'sunquan', name: '孙权', faction: 'wu', rarity: 'legendary', skill: { name: '制衡', description: '每回合可换1张锦囊卡', type: 'active' }, unlocked: true },
-  { id: 'zhugeliang', name: '诸葛亮', faction: 'shu', rarity: 'epic', skill: { name: '神算', description: '可查看下一张锦囊卡', type: 'active' }, unlocked: true },
-  { id: 'guanyu', name: '关羽', faction: 'shu', rarity: 'epic', skill: { name: '武圣', description: '免费出狱1次', type: 'passive' }, unlocked: true },
-  { id: 'zhouyu', name: '周瑜', faction: 'wu', rarity: 'epic', skill: { name: '火攻', description: '火攻卡效果翻倍', type: 'passive' }, unlocked: true },
-])
+// 使用导入的武将列表
 
 const selectedHero = ref<string | null>(null)
 const isReady = ref(false)
@@ -351,22 +344,31 @@ onUnmounted(() => {
               <div
                 :class="[
                   'absolute top-2 right-2 w-12 h-12 flex items-center justify-center text-lg font-bold rounded border-2 rotate-12',
-                  hero.faction === 'wei' ? 'bg-blue-900/80 border-blue-400 text-blue-300' : '',
-                  hero.faction === 'shu' ? 'bg-green-900/80 border-green-400 text-green-300' : '',
-                  hero.faction === 'wu' ? 'bg-red-900/80 border-red-400 text-red-300' : ''
+                  hero.faction === '魏' ? 'bg-blue-900/80 border-blue-400 text-blue-300' : '',
+                  hero.faction === '蜀' ? 'bg-green-900/80 border-green-400 text-green-300' : '',
+                  hero.faction === '吴' ? 'bg-red-900/80 border-red-400 text-red-300' : ''
                 ]"
                 style="font-family: 'KaiTi', 'STKaiti', serif;"
               >
-                {{ hero.faction === 'wei' ? '魏' : hero.faction === 'shu' ? '蜀' : '吴' }}
+                {{ hero.faction }}
               </div>
               
               <!-- 武将头像 -->
-              <div class="w-24 h-24 mx-auto mb-3 rounded-lg bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center text-5xl border-4 shadow-lg"
+              <div class="w-24 h-24 mx-auto mb-3 rounded-lg overflow-hidden border-4 shadow-lg"
                 :class="hero.faction === '魏' ? 'border-blue-500 shadow-blue-500/20' : hero.faction === '蜀' ? 'border-green-500 shadow-green-500/20' : 'border-red-500 shadow-red-500/20'"
               >
-                <span class="font-bold" 
+                <img 
+                  :src="`/assets/heroes/${hero.id}.jpg`" 
+                  :alt="hero.name"
+                  class="w-full h-full object-cover"
+                  @error="$event.target.style.display='none'; $event.target.nextElementSibling.style.display='flex'"
+                />
+                <div 
+                  class="w-full h-full bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center text-5xl hidden"
                   :class="hero.faction === '魏' ? 'text-blue-400' : hero.faction === '蜀' ? 'text-green-400' : 'text-red-400'"
-                >{{ hero.name[0] }}</span>
+                >
+                  <span class="font-bold">{{ hero.name[0] }}</span>
+                </div>
               </div>
               
               <!-- 武将名称 -->
