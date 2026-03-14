@@ -4,10 +4,11 @@
     
     <!-- 玩家棋子层 -->
     <div class="players-layer">
-      <div 
-        v-for="(player, index) in players" 
+      <div
+        v-for="(player, index) in players"
         :key="player.id"
         class="player-piece"
+        :class="{ current: currentPlayerId === player.id }"
         :style="getPlayerStyle(player.position, index)"
       >
         <!-- 武将头像 -->
@@ -487,15 +488,16 @@ canvas {
 }
 
 .piece-avatar {
-  width: 36px;
-  height: 36px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid #8b7355;
   box-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.3),
-    0 0 0 2px rgba(245, 240, 230, 0.8);
+    0 3px 10px rgba(0, 0, 0, 0.4),
+    0 0 0 3px rgba(245, 240, 230, 0.9);
   position: relative;
+  background: #f5f0e6;
 }
 
 .piece-avatar img {
@@ -517,13 +519,19 @@ canvas {
 /* 势力徽章 */
 .faction-badge {
   position: absolute;
-  bottom: -2px;
-  right: -2px;
-  width: 14px;
-  height: 14px;
+  bottom: -3px;
+  right: -3px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   border: 2px solid #f5f0e6;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  font-size: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
 }
 
 .faction-badge.faction-魏 {
@@ -559,8 +567,16 @@ canvas {
 }
 
 /* 当前玩家高亮 */
-.player-piece:has(.piece-avatar img) {
-  animation: pulse 2s infinite;
+.player-piece.current {
+  animation: pulse 1.5s infinite;
+}
+
+.player-piece.current .piece-avatar {
+  border-color: #ffd700 !important;
+  box-shadow: 
+    0 0 15px rgba(255, 215, 0, 0.6),
+    0 3px 10px rgba(0, 0, 0, 0.4),
+    0 0 0 3px rgba(255, 215, 0, 0.3);
 }
 
 @keyframes pulse {
@@ -568,7 +584,7 @@ canvas {
     transform: translate(-50%, -50%) scale(1);
   }
   50% {
-    transform: translate(-50%, -50%) scale(1.1);
+    transform: translate(-50%, -50%) scale(1.15);
   }
 }
 </style>
