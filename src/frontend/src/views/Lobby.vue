@@ -96,7 +96,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen p-4">
+  <div class="min-h-screen p-4 bg-gradient-to-br from-amber-950/20 via-slate-900 to-red-950/20 relative overflow-hidden">
+    <!-- 中国风背景装饰 -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-0 left-0 w-96 h-96 bg-amber-500 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-red-500 rounded-full blur-3xl"></div>
+    </div>
     <!-- 顶部栏 -->
     <div class="flex justify-between items-center mb-6">
       <div>
@@ -296,4 +301,27 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.font-chinese {
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', 'Ma Shan Zheng', cursive;
+}
+
+.text-gold {
+  color: #d4af37;
+}
+
+.bg-gold {
+  background-color: #d4af37;
+}
+
+.border-gold {
+  border-color: #d4af37;
+}
+
+/* 中国风配色 */
+:root {
+  --color-wei-primary: #3b82f6;
+  --color-shu-primary: #22c55e;
+  --color-wu-primary: #ef4444;
+  --color-gold-primary: #d4af37;
+}
 </style>
