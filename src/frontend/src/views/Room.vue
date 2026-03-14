@@ -358,7 +358,7 @@ onUnmounted(() => {
                 :class="hero.faction === '魏' ? 'border-blue-500 shadow-blue-500/20' : hero.faction === '蜀' ? 'border-green-500 shadow-green-500/20' : 'border-red-500 shadow-red-500/20'"
               >
                 <img 
-                  :src="`/assets/heroes/${hero.id}.jpg`" 
+                  :src="`/heroes/${hero.id}.jpg`" 
                   :alt="hero.name"
                   class="w-full h-full object-cover"
                   @error="($event.target as HTMLImageElement).style.display='none'; (($event.target as HTMLImageElement).nextElementSibling as HTMLElement).style.display='flex'"
