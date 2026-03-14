@@ -96,12 +96,26 @@ onMounted(() => {
     }
     
     const config = roomConfigs[roomId.value] || { name: '新房间', maxPlayers: 4, hostId: playerId.value, players: [] }
+    
+    // 检查当前用户是否已在玩家列表中，如果不在则添加
+    const players = [...config.players]
+    const existingPlayer = players.find(p => p.id === playerId.value)
+    if (!existingPlayer) {
+      players.push({
+        id: playerId.value,
+        name: playerName.value,
+        hero: '',
+        isReady: false,
+        isHost: false
+      })
+    }
+    
     roomData.value = {
       id: roomId.value,
       name: config.name,
       hostId: config.hostId,
       maxPlayers: config.maxPlayers,
-      players: config.players,
+      players: players,
       status: 'waiting'
     }
     
