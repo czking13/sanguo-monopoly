@@ -154,7 +154,7 @@ function addBot() {
   
   const botNames = ['曹操AI', '刘备AI', '孙权AI', '诸葛亮AI', '关羽AI', '周瑜AI']
   const usedHeroes = roomData.value.players.map(p => p.hero)
-  const availableHeroes = heroes.value.filter(h => !usedHeroes.includes(h.id))
+  const availableHeroes = heroes.filter((h: Hero) => !usedHeroes.includes(h.id))
   
   if (availableHeroes.length === 0) {
     alert('没有可用武将了')
@@ -215,7 +215,7 @@ function getRarityColor(rarity: string) {
 }
 
 function getHeroName(heroId: string) {
-  return heroes.value.find(h => h.id === heroId)?.name || '未选择'
+  return heroes.find((h: Hero) => h.id === heroId)?.name || '未选择'
 }
 
 onUnmounted(() => {
@@ -361,7 +361,7 @@ onUnmounted(() => {
                   :src="`/assets/heroes/${hero.id}.jpg`" 
                   :alt="hero.name"
                   class="w-full h-full object-cover"
-                  @error="$event.target.style.display='none'; $event.target.nextElementSibling.style.display='flex'"
+                  @error="($event.target as HTMLImageElement).style.display='none'; (($event.target as HTMLImageElement).nextElementSibling as HTMLElement).style.display='flex'"
                 />
                 <div 
                   class="w-full h-full bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center text-5xl hidden"
