@@ -98,12 +98,12 @@ onMounted(() => {
 <template>
   <div class="min-h-screen p-4 bg-gradient-to-br from-amber-950/20 via-slate-900 to-red-950/20 relative overflow-hidden">
     <!-- 中国风背景装饰 -->
-    <div class="absolute inset-0 opacity-5">
+    <div class="absolute inset-0 opacity-5 pointer-events-none">
       <div class="absolute top-0 left-0 w-96 h-96 bg-amber-500 rounded-full blur-3xl"></div>
       <div class="absolute bottom-0 right-0 w-96 h-96 bg-red-500 rounded-full blur-3xl"></div>
     </div>
     <!-- 顶部栏 -->
-    <div class="flex justify-between items-center mb-6">
+    <div class="relative z-10 flex justify-between items-center mb-6">
       <div>
         <h1 class="text-3xl font-chinese text-gold">游戏大厅</h1>
         <div class="flex items-center gap-3 mt-1">
@@ -139,7 +139,7 @@ onMounted(() => {
     </div>
 
     <!-- 房间列表 -->
-    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <div class="relative z-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       <div
         v-for="room in filteredRooms"
         :key="room.id"
