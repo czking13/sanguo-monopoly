@@ -358,8 +358,8 @@ io.on('connection', (socket) => {
 // 启动服务器
 const start = async () => {
   try {
-    await fastify.listen({ port: 3002, host: '0.0.0.0' })
-    console.log('服务器运行在 http://0.0.0.0:3002')
+    await fastify.listen({ port: 3001, host: '0.0.0.0' })
+    console.log('服务器运行在 http://0.0.0.0:3001')
   } catch (err) {
     fastify.log.error(err)
     process.exit(1)
